@@ -31,9 +31,14 @@ message(STATUS "C++ compiler version: ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "C++ compiler flags: ${CMAKE_CXX_FLAGS}")
 
 #Дополнительные файлы проекта
-include_directories(inc ${VULKAN_SDK}/Include)
+include_directories(inc engine/src ${VULKAN_SDK}/Include)
 link_directories(${VULKAN_SDK}/Lib)
 file(GLOB SRCC "./src/*.cpp")
+set(libs "vulkan-1 user32")
+
+add_library(engine SHARED engine/src/test.cpp)
+target_compile_definitions(engine PRIVATE WEXPORT)
+target_include_directories(engine PUBLIC engine/src)
 
 # Добавляем флаги компиляции
 add_compile_options(-Wno-c++98-compat -Wno-pragma-pack)
@@ -45,8 +50,10 @@ add_executable(${PROJECT_NAME} main.cpp ${SRCC})
 
 # Условное связывание библиотек в зависимости от конфигурации
 target_link_libraries(${PROJECT_NAME} PRIVATE 
-    $<$<CONFIG:Debug>:sfml-main-d sfml-graphics-s-d sfml-window-s-d sfml-system-s-d>
-    $<$<CONFIG:Release>:sfml-main sfml-graphics-s sfml-window-s sfml-system-s>
+    #$<$<CONFIG:Debug>:sfml-main-d sfml-graphics-s-d sfml-window-s-d sfml-system-s-d>
+    #$<$<CONFIG:Release>:sfml-main sfml-graphics-s sfml-window-s sfml-system-s>
+		
+		engine
 )
 
 # Указываем флаг подсистемы Windows для компоновщика чтоб запускалось графическое приложение без консольного окна

@@ -1,13 +1,8 @@
-#include <vulkan/vulkan.hpp>
+#include "engine/src/test.hpp"
 
-void InitVulkan() {
+int main() {
 	
-	static vk::DynamicLoader dL;
+	print_int(42);
 	
-	static bool uninitialized = 1;
-	if(uninitialized) {
-		PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr = dL.getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddr");
-		static vk::DispatchLoaderDynamic dispatcher(vkGetInstanceProcAddr);
-		uninitialized = 0;
-	}	
+	return 0;
 }
