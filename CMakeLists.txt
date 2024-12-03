@@ -31,12 +31,12 @@ message(STATUS "C++ compiler version: ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "C++ compiler flags: ${CMAKE_CXX_FLAGS}")
 
 #Дополнительные файлы проекта
-include_directories(inc engine/src ${VULKAN_SDK}/Include)
+include_directories(inc engine/src engine/src/core ${VULKAN_SDK}/Include)
 link_directories(${VULKAN_SDK}/Lib)
 file(GLOB SRCC "./src/*.cpp")
 set(libs "vulkan-1 user32")
 
-add_library(engine SHARED engine/src/test.cpp)
+add_library(engine SHARED engine/src/core/logger.cpp)
 target_compile_definitions(engine PRIVATE WEXPORT)
 target_include_directories(engine PUBLIC engine/src)
 
