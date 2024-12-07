@@ -1,3 +1,3 @@
-cd build
+cd bin
 Vulk.exe
 cd ..

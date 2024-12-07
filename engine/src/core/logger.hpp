@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../defines.hpp"
+#include "../platform/platform.hpp"
 
 #include <string>
 #include <stdio.h>
@@ -30,13 +31,20 @@ b8 init_logging();
 void shutdown_logging();
 
 template <typename... Args>
-void log_output(log_lvl lvl, const std::string_view mes, Args&&... args) {
-	constexpr std::array<const char*, 6> lvl_strings = {
-		"[FATAL]: ", "[ERROR]: ", "[WARN]: ", "[INFO]: ", "[DEBUG]: ", "[TRACE]: "
-	};
-
-	std::string formatted_message = std::vformat(mes, std::make_format_args(args...));
-	printf("%s%s\n", lvl_strings[static_cast<int>(lvl)], formatted_message.data());
+void log_output(log_lvl lvl, std::wstring_view mes, Args&&... args) {
+	// constexpr std::array<const char*, 6> lvl_strings = {
+	// 	"[FATAL]: ", "[ERROR]: ", "[WARN]: ", "[INFO]: ", "[DEBUG]: ", "[TRACE]: "
+	// };
+	b8 is_error = lvl < log_lvl::LOG_LEVEL_WARN;
+	std::wstring formatted_message = std::vformat(mes, std::make_wformat_args(args...));
+	
+	if(is_error) {
+		platform_console_write_error(formatted_message, static_cast<u8>(lvl));
+	} else {
+		platform_console_write(formatted_message, static_cast<u8>(lvl));
+	}
+	
+	// printf("%s%s\n", lvl_strings[static_cast<int>(lvl)], formatted_message.data());
 }
 
 #define WFATAL(mes, ...) log_output(log_lvl::LOG_LEVEL_FATAL, mes, ##__VA_ARGS__)

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.5.0)
 project(Vulk VERSION 0.1.0 LANGUAGES C CXX)
 set(project_dir ${CMAKE_SOURCE_DIR})
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
 #include(CTest)
 #enable_testing()
 
@@ -31,14 +32,14 @@ message(STATUS "C++ compiler version: ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "C++ compiler flags: ${CMAKE_CXX_FLAGS}")
 
 #Дополнительные файлы проекта
-include_directories(inc engine/src engine/src/core ${VULKAN_SDK}/Include)
+include_directories(inc engine/src engine/src/core engine/src/platform ${VULKAN_SDK}/Include)
 link_directories(${VULKAN_SDK}/Lib)
 file(GLOB SRCC "./src/*.cpp")
 set(libs "vulkan-1 user32")
 
-add_library(engine SHARED engine/src/core/logger.cpp)
+add_library(engine SHARED engine/src/core/logger.cpp engine/src/platform/platform_win.cpp)
 target_compile_definitions(engine PRIVATE WEXPORT)
-target_include_directories(engine PUBLIC engine/src)
+target_include_directories(engine PUBLIC engine/src engine/src/core engine/src/platform)
 
 # Добавляем флаги компиляции
 add_compile_options(-Wno-c++98-compat -Wno-pragma-pack)

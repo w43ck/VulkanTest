@@ -4,8 +4,8 @@
 // TODO: temporary
 // ...
 
-void report_assertion_failure(const char * expression, const char * message, const char * file, i32 line) {
-	log_output(log_lvl::LOG_LEVEL_FATAL, "Assertion Failure: {}, message: {}, in file: {}, line: {}\n", expression, message, file, line);
+void report_assertion_failure(const wchar_t * expression, const wchar_t * message, const wchar_t * file, i32 line) {
+	log_output(log_lvl::LOG_LEVEL_FATAL, L"Assertion Failure: {}, message: {}, in file: {}, line: {}\n", expression, message, file, line);
 }
 
 
