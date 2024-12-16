@@ -6,4 +6,4 @@ To build and run the executable one's need to do:
 	
  1) run dbuild.bat/rbuild.bat (debug/release version);
  2) run dmb.bat/rmb.bat (debug/release version);
- 3) run run.bat
+ 3) run run.bat (or .exe file in bin/ )
