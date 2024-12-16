@@ -8,15 +8,15 @@ struct platform_state {
 	void * internal_state;
 };
 
-WAPI b8 platform_startup(platform_state * pf_state, std::wstring_view app_name, i32 x, i32 y, i32 width, i32 height);
+b8 platform_startup(platform_state * pf_state, std::wstring_view app_name, i32 x, i32 y, i32 width, i32 height);
 
-WAPI void platform_shutdown(platform_state * pf_state);
+void platform_shutdown(platform_state * pf_state);
 
-WAPI b8 platform_pump_messages(platform_state * pf_state);
+b8 platform_pump_messages(platform_state * pf_state);
 
 
-void * platfrom_allocate(const u64 size, const b8 aligned);
-void platform_free(void * block, const b8 aligned);
+WAPI void * platfrom_allocate(const u64 size, const b8 aligned);
+WAPI void platform_free(void * block, const b8 aligned);
 void * platform_zero_memory(void * block, const u64 size);
 void * platform_copy_memory(void * dest, const void * source, const u64 size);
 void * platform_set_memory(void * dest, const i32 value, const u64 size);

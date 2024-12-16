@@ -37,14 +37,14 @@ link_directories(${VULKAN_SDK}/Lib)
 file(GLOB SRCC "./src/*.cpp")
 set(libs "vulkan-1 user32")
 
-add_library(engine SHARED engine/src/core/logger.cpp engine/src/platform/platform_win.cpp)
+add_library(engine SHARED engine/src/core/logger.cpp engine/src/platform/platform_win.cpp engine/src/core/application.cpp)
 target_compile_definitions(engine PRIVATE WEXPORT)
 target_include_directories(engine PUBLIC engine/src engine/src/core engine/src/platform)
 
 # Добавляем флаги компиляции
 add_compile_options(-Wno-c++98-compat -Wno-pragma-pack)
 
-add_executable(${PROJECT_NAME} main.cpp ${SRCC})
+add_executable(${PROJECT_NAME} engine/src/entry.cpp ${SRCC})
 
 # ИКОНКА из ресурсного файла
 #target_sources(${PROJECT_NAME} PRIVATE src/app.rc)
