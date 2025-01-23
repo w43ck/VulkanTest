@@ -15,8 +15,8 @@ void platform_shutdown(platform_state * pf_state);
 b8 platform_pump_messages(platform_state * pf_state);
 
 
-WAPI void * platfrom_allocate(const u64 size, const b8 aligned);
-WAPI void platform_free(void * block, const b8 aligned);
+void * platfrom_allocate(const u64 size, const b8 aligned);
+void platform_free(void * block, const b8 aligned);
 void * platform_zero_memory(void * block, const u64 size);
 void * platform_copy_memory(void * dest, const void * source, const u64 size);
 void * platform_set_memory(void * dest, const i32 value, const u64 size);

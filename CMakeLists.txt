@@ -37,7 +37,9 @@ link_directories(${VULKAN_SDK}/Lib)
 file(GLOB SRCC "./src/*.cpp")
 set(libs "vulkan-1 user32")
 
-add_library(engine SHARED engine/src/core/logger.cpp engine/src/platform/platform_win.cpp engine/src/core/application.cpp)
+file(GLOB LIBCORESRC "engine/src/core/*.cpp")
+file(GLOB LIBPLATFORMSRC "engine/src/platform/*.cpp")
+add_library(engine SHARED ${LIBCORESRC} ${LIBPLATFORMSRC})
 target_compile_definitions(engine PRIVATE WEXPORT)
 target_include_directories(engine PUBLIC engine/src engine/src/core engine/src/platform)
 

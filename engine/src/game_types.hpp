@@ -24,6 +24,6 @@ struct game {
 	using On_resize = std::function<void(game *, u32, u32)>;
 	On_resize on_resize;
 	
-	std::unique_ptr<game_state> state;
+	void * state;
 	
 };

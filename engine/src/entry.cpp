@@ -1,5 +1,6 @@
 #include "../../src/game.hpp"
 #include "core/logger.hpp"
+#include "core/wmemory.hpp"
 
 // #include "../engine/src/platform/platform.hpp"
 #include "../src/game_types.hpp"
@@ -17,7 +18,7 @@ b8 create_game(game & out_game) {
 	out_game.update = game_update;
 	out_game.on_resize = game_on_resize;
 	
-	out_game.state = std::make_unique<game_state>();
+	out_game.state = wallocate(sizeof(game_state), mem_tag::MEMORY_TAG_GAME);
 	
 	return true;
 }
@@ -26,6 +27,8 @@ b8 create_game(game & out_game) {
 	The main entry point of the app
 */
 int main() {
+	
+	initialize_memory();
 	
 	// Request the game instance from the app
 	game game_inst;
@@ -50,6 +53,8 @@ int main() {
 		WINFO(L"App did not shutdown gracefully");
 		return 2;
 	}
+	
+	shutdown_memory();
 	
 	return 0;
 }

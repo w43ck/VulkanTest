@@ -2,6 +2,7 @@
 #include "logger.hpp"
 #include "../platform/platform.hpp"
 #include "../game_types.hpp"
+#include "wmemory.hpp"
 
 struct app_state {
 	
@@ -64,6 +65,9 @@ b8 app_create(game & game_inst) {
 }
 
 b8 app_run() {
+	
+	WINFO(get_memory_usage_str());
+	
 	while(app_st.is_running) {
 			if(!platform_pump_messages(&app_st.pf_state)) {
 				app_st.is_running = false;
