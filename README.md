@@ -3,6 +3,7 @@ It's one of my attempts to learn Vulkan. This one is based on Kohi's tutorial: h
 You need to install CMake and Make utilits to build this app.
 
 To build and run the executable one's need to do:
-	1) run dbuild.bat/rbuild.bat (debug/release version);
-	2) run dmb.bat/rmb.bat (debug/release version);
-	3) run run.bat
+	
+ 1) run dbuild.bat/rbuild.bat (debug/release version);
+ 2) run dmb.bat/rmb.bat (debug/release version);
+ 3) run run.bat (or .exe file in bin/ )
